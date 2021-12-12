@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { React, useState } from "react";
+import { Data } from "./Components/Data";
+import "./App.css";
+import MovieList from "./Components/MovieList";
+import NavBar from "./Components/NavBar";
+import ModalAddMovie from "./Components/ModalAddMovie";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [movies, setMovies] = useState(Data);
+    const [search, setSearch] = useState("");
+    const addMovie = (newMovie) => {
+        setMovies([...movies, newMovie]);
+    };
+    return (
+        <div className="App">
+            <NavBar search={search} setSearch={setSearch} />
+            <MovieList movies={movies} search={search} />
+            <ModalAddMovie addMovie={addMovie} />
+        </div>
+    );
 }
 
 export default App;
